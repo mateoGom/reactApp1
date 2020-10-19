@@ -10,6 +10,7 @@ class App extends Component {
       { name: "fabio", age: "34" },
       { name: "daniel", age: "45" },
     ],
+    showPersons:false 
   };
 
   switchNameHandler = (newName) => {
@@ -32,6 +33,14 @@ class App extends Component {
     });
   };
 
+  togglePersonsHandler=()=>{
+    const doesShow=this.state.showPersons;
+    this.setState({
+     showPersons: !doesShow
+    });
+
+  };
+
   render() {
     const style = {
       backgroundColor: "white",
@@ -41,13 +50,21 @@ class App extends Component {
       cursor: "pointer",
     };
 
+   
+
     return (
       <div className="App">
         <p>Welcome</p>
-        <button style={style} onClick={() => this.switchNameHandler("Maximilian!!")}>
-          Switch name
+        {/* <button style={style} onClick={() => this.switchNameHandler("Maximilian!!")}> */}
+        <button style={style} onClick={ this.togglePersonsHandler}>
+
+          toggle person
         </button>
-        <Person
+      
+      {
+        this.state.showPersons === true ?
+        <div>
+       <Person
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}
         >
@@ -63,6 +80,9 @@ class App extends Component {
           name={this.state.persons[2].name}
           age={this.state.persons[2].age}
         ></Person>
+         </div>:null
+      } 
+      
       </div>
     );
   }
