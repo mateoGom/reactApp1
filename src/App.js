@@ -22,7 +22,7 @@ class App extends Component {
     });
   };
 
-  changeNameHandler=(event)=>{
+  changeNameHandler = (event) => {
     this.setState({
       persons: [
         { name: "gio", age: "42" },
@@ -30,15 +30,23 @@ class App extends Component {
         { name: "cristian", age: "95" },
       ],
     });
-
-
-  }
+  };
 
   render() {
+    const style = {
+      backgroundColor: "white",
+      font: "inherit",
+      border: "1px solid blue",
+      padding: "8px",
+      cursor: "pointer",
+    };
+
     return (
       <div className="App">
         <p>Welcome</p>
-        <button onClick={()=>this.switchNameHandler('Maximilian!!')}>Switch name</button>
+        <button style={style} onClick={() => this.switchNameHandler("Maximilian!!")}>
+          Switch name
+        </button>
         <Person
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}
@@ -48,13 +56,12 @@ class App extends Component {
         <Person
           name={this.state.persons[1].name}
           age={this.state.persons[1].age}
-          click={()=>this.switchNameHandler('Max!!')}
+          click={() => this.switchNameHandler("Max!!")}
           changed={this.changeNameHandler}
         ></Person>
         <Person
           name={this.state.persons[2].name}
           age={this.state.persons[2].age}
-         
         ></Person>
       </div>
     );
