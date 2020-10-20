@@ -10,7 +10,7 @@ class App extends Component {
       { name: "fabio", age: "34" },
       { name: "daniel", age: "45" },
     ],
-    showPersons:false 
+    showPersons: false,
   };
 
   switchNameHandler = (newName) => {
@@ -33,12 +33,11 @@ class App extends Component {
     });
   };
 
-  togglePersonsHandler=()=>{
-    const doesShow=this.state.showPersons;
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
     this.setState({
-     showPersons: !doesShow
+      showPersons: !doesShow,
     });
-
   };
 
   render() {
@@ -50,39 +49,38 @@ class App extends Component {
       cursor: "pointer",
     };
 
-   
+    let person = null;
+    if (this.state.showPersons) {
+      person=(
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+          >
+            My hobbies are
+          </Person>
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={() => this.switchNameHandler("Max!!")}
+            changed={this.changeNameHandler}
+          ></Person>
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+          ></Person>
+        </div>
+      );
+    }
 
     return (
       <div className="App">
         <p>Welcome</p>
         {/* <button style={style} onClick={() => this.switchNameHandler("Maximilian!!")}> */}
-        <button style={style} onClick={ this.togglePersonsHandler}>
-
+        <button style={style} onClick={this.togglePersonsHandler}>
           toggle person
         </button>
-      
-      {
-        this.state.showPersons === true ?
-        <div>
-       <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-        >
-          My hobbies are
-        </Person>
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={() => this.switchNameHandler("Max!!")}
-          changed={this.changeNameHandler}
-        ></Person>
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-        ></Person>
-         </div>:null
-      } 
-      
+        {person}
       </div>
     );
   }
