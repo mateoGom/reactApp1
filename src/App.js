@@ -40,11 +40,12 @@ class App extends Component {
     });
   };
 
-  deletePersonHandler=(indexPerson)=>{
-    const persons=this.state.persons;
-    persons.splice(indexPerson,1);
-    this.setState({persons:persons});
-  }
+  deletePersonHandler = (indexPerson) => {
+    // const persons=this.state.persons;
+    const persons = [...this.state.persons];
+    persons.splice(indexPerson, 1);
+    this.setState({ persons: persons });
+  };
 
   render() {
     const style = {
@@ -57,18 +58,17 @@ class App extends Component {
 
     let person = null;
     if (this.state.showPersons) {
-      person=(
+      person = (
         <div>
-         {
-           this.state.persons.map((person,index)=>{
-             return <Person
-             click={()=>this.deletePersonHandler(index)}
-             name={person.name}
-             age={person.age} 
-             />
-           }
-            )
-         }
+          {this.state.persons.map((person, index) => {
+            return (
+              <Person
+                click={() => this.deletePersonHandler(index)}
+                name={person.name}
+                age={person.age}
+              />
+            );
+          })}
         </div>
       );
     }
