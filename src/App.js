@@ -6,9 +6,9 @@ import Person from "./Person/Person";
 class App extends Component {
   state = {
     persons: [
-      {id:"er4", name: "uribe", age: "2" },
-      {id:"h7", name: "fabio", age: "34" },
-      {id:"efef5", name: "daniel", age: "45" },
+      { id: "er4", name: "uribe", age: "2" },
+      { id: "h7", name: "fabio", age: "34" },
+      { id: "efef5", name: "daniel", age: "45" },
     ],
     showPersons: false,
   };
@@ -23,13 +23,23 @@ class App extends Component {
     });
   };
 
-  changeNameHandler = (event) => {
+  changeNameHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex((p) => {
+      return p.id === id;
+    });
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+
+    person.name = event.target.value;
+
+    const persons = [
+      ...this.state.persons
+    ];
+    persons[personIndex] = person;
+
     this.setState({
-      persons: [
-        { name: "gio", age: "42" },
-        { name: event.target.value, age: "78" },
-        { name: "cristian", age: "95" },
-      ],
+      persons: persons
     });
   };
 
@@ -67,6 +77,7 @@ class App extends Component {
                 name={person.name}
                 age={person.age}
                 key={person.id}
+                changed={(event) => this.changeNameHandler(event, person.id)}
               />
             );
           })}
