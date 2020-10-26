@@ -28,18 +28,16 @@ class App extends Component {
       return p.id === id;
     });
     const person = {
-      ...this.state.persons[personIndex]
+      ...this.state.persons[personIndex],
     };
 
     person.name = event.target.value;
 
-    const persons = [
-      ...this.state.persons
-    ];
+    const persons = [...this.state.persons];
     persons[personIndex] = person;
 
     this.setState({
-      persons: persons
+      persons: persons,
     });
   };
 
@@ -83,13 +81,22 @@ class App extends Component {
           })}
         </div>
       );
-      style.backgroundColor='red';
+      style.backgroundColor = "red";
+    }
+
+    const clases = [];
+    if (this.state.persons.length <= 2) {
+      clases.push("red");
+    }
+    if (this.state.persons.length <= 1) {
+      clases.push("bold");
     }
 
     return (
       <div className="App">
         <p>Welcome</p>
         {/* <button style={style} onClick={() => this.switchNameHandler("Maximilian!!")}> */}
+        <p className={clases.join(" ")}>this really works!</p>
         <button style={style} onClick={this.togglePersonsHandler}>
           toggle person
         </button>
