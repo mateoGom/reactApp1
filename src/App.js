@@ -5,13 +5,13 @@ import Person from "./Person/Person";
 
 
 const StyledButton=styled.button`
-background-color: green;
+background-color: ${props=>props.alt ? 'red' : 'green'};
 font: inherit;
 border: 1px solid blue;
 padding: 8px;
 cursor: pointer;
 &:hover {
-  background-color: lightgreen;
+  background-color: ${props=>props.alt ? 'lightgreen' : 'salmon'};
   color: black;
 }
 `;
@@ -98,11 +98,11 @@ class App extends Component {
           })}
         </div>
       );
-      style.backgroundColor = "red";
-      style[':hover']={
-        backgroundColor: "salmon",
-        color: "black"
-      }
+      // style.backgroundColor = "red";
+      // style[':hover']={
+      //   backgroundColor: "salmon",
+      //   color: "black"
+      // }
     }
 
     const clases = [];
@@ -121,7 +121,7 @@ class App extends Component {
         <p>Welcome</p>
         {/* <button style={style} onClick={() => this.switchNameHandler("Maximilian!!")}> */}
         <p className={clases.join(" ")}>this really works!</p>
-        <StyledButton  onClick={this.togglePersonsHandler}>
+        <StyledButton alt={this.state.showPersons}  onClick={this.togglePersonsHandler}>
           toggle person
         </StyledButton>
         {person}
